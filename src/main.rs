@@ -1,35 +1,34 @@
-use std::cmp::Ordering;
-use std::io;
-use rand::Rng;
+mod data;
+use data::city::City as city;
+use data::factory::Factory as factory;
+use data::transport::Transport as transport;
+use data::factory::Product as product;
+use data::transport::TransportType as transport_type;
 
 fn main() {
+    let new_york = city::new(
+        String::from("New York"),
+        (12.42, 123.43),
+        500
+    );
 
-    let secret = rand::thread_rng().gen_range(1..=52);
+    let steelwork = factory::new(
+        String::from("Steelwork"),
+        (12.42, 123.43),
+        5000,
+        0.45,
+        product::Steel
+    );
 
-    println!("Secret number: {}", secret);
+    let truck = transport::new(
+        String::from("Speedy Cargo"),
+        (12.42, 123.43),
+        3400,
+        0.45,
+        transport_type::Truck
+    );
 
-    println!("Guessing game!");
-
-    loop {
-        println!("Input your guess:");
-
-        let mut guess = String::new();
-        io::stdin().read_line(&mut guess).expect("fail");
-
-        let guess: i32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => continue,
-        };
-
-        println!("You guessed {}", guess);
-
-        match guess.cmp(&secret) {
-            Ordering::Less => println!("Too small!"),
-            Ordering::Greater => println!("Too big!"),
-            Ordering::Equal => {
-                println!("You win!");
-                break;
-            },
-        }
-    }
+    println!("City created: {:?}", new_york);
+    println!("Factory created: {:?}", steelwork);
+    println!("Transport created: {:?}", truck);
 }
