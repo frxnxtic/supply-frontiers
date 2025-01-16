@@ -32,24 +32,12 @@ impl Transport {
         }
     }
 
-    pub fn get_name(&self) -> &str {
-        &self.name
-    }
-
-    pub fn get_coordinates(&self) -> (f32, f32) {
-        self.coordinates
-    }
-
-    pub fn get_capacity(&self) -> i32 {
-        self.capacity
-    }
-
-    pub fn get_transport_type(&self) -> &TransportType {
-        &self.transport_type
-    }
-
     pub fn move_to(&mut self, new_coordinates: (f32, f32)) {
         self.coordinates = new_coordinates;
+    }
+
+    pub fn move_step(&mut self) {
+        println!("Transport {} updated it's location", self.name);
     }
 }
 

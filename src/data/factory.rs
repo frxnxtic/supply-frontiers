@@ -31,23 +31,13 @@ impl Factory {
         }
     }
 
-    pub fn get_name(&self) -> &str {
-        &self.name
-    }
-
-    pub fn get_coordinates(&self) -> (f32, f32) {
-        self.coordinates
-    }
-
-    pub fn get_capacity(&self) -> i32 {
-        self.capacity
-    }
-    pub fn get_product_type(&self) -> &Product {
-        &self.product_type
-    }
 
     pub fn produce(&self) -> f32 {
         self.production_rate
+    }
+
+    pub fn produce_resources(&self) {
+        println!("Factory {} produced {:?}", self.name, self.product_type);
     }
 }
 
@@ -58,10 +48,10 @@ mod tests {
     #[test]
     fn test_factory_creation() {
         let factory = Factory::new(String::from("Steelworks"), (45.0, 90.0), 1000, 50.0, Product::Metal);
-        assert_eq!(factory.get_name(), "Steelworks");
+        assert_eq!(factory.name, "Steelworks");
         assert_eq!(factory.coordinates, (45.0, 90.0));
         assert_eq!(factory.capacity, 1000);
-        assert_eq!(factory.produce(), 50.0);
+        assert_eq!(factory.production_rate, 50.0);
     }
 
     #[test]
